@@ -11,15 +11,22 @@ type Props = {
 }
 
 const Footer: React.FC<Props> = ({ className }) => {
+  const copyright = `© ${CONFIG.profile.name} ${
+    from === y || !from ? y : `${from} - ${y}`
+  }`
   return (
     <StyledWrapper className={className}>
-      <a
-        href={`https://github.com/${CONFIG.profile.github}`}
-        target="_blank"
-        rel="noreferrer"
-      >
-        © {CONFIG.profile.name} {from === y || !from ? y : `${from} - ${y}`}
-      </a>
+      {CONFIG.profile.github ? (
+        <a
+          href={`https://github.com/${CONFIG.profile.github}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {copyright}
+        </a>
+      ) : (
+        <span>{copyright}</span>
+      )}
     </StyledWrapper>
   )
 }
