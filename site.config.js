@@ -27,6 +27,10 @@ const CONFIG = {
   // notion configuration (required)
   notionConfig: {
     pageId: process.env.NOTION_PAGE_ID,
+    // Notion's public site API endpoint (the default www.notion.so endpoint now fails with 530)
+    apiBaseUrl:
+      process.env.NOTION_API_BASE_URL ||
+      "https://nuringdots.notion.site/api/v3",
   },
 
   // plugin configuration (optional)
