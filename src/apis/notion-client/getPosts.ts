@@ -44,6 +44,19 @@ export const getPosts = async () => {
       properties.fullWidth =
         (pageBlockValue?.format as any)?.page_full_width ?? false
 
+      // Defaults so only `status` needs to be set when publishing
+      if (!properties.status?.length) properties.status = ["Private"]
+      if (!properties.type?.length) properties.type = ["Post"]
+      if (!properties.slug?.trim()) {
+        properties.slug = `post-${id.replace(/-/g, "").slice(0, 8)}`
+      }
+      if (!properties.date?.start_date) {
+        // created time in KST (UTC+9)
+        const createdMs = pageBlockValue?.created_time ?? Date.now()
+        const kst = new Date(createdMs + 9 * 60 * 60 * 1000)
+        properties.date = { start_date: kst.toISOString().slice(0, 10) }
+      }
+
       data.push(properties)
     }
 
