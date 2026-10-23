@@ -1,7 +1,7 @@
 import { CONFIG } from "site.config"
-import { NotionAPI } from "notion-client"
 import { idToUuid } from "notion-utils"
 
+import { fetchPage } from "src/libs/utils/notion/fetchPage"
 import getAllPageIds from "src/libs/utils/notion/getAllPageIds"
 import getPageProperties from "src/libs/utils/notion/getPageProperties"
 import { TPosts } from "src/types"
@@ -13,19 +13,7 @@ import { TPosts } from "src/types"
 // TODO: react query를 사용해서 처음 불러온 뒤로는 해당데이터만 사용하도록 수정
 export const getPosts = async () => {
   let id = CONFIG.notionConfig.pageId as string
-  const api = new NotionAPI({ apiBaseUrl: CONFIG.notionConfig.apiBaseUrl })
-
-  let response
-  try {
-    response = await api.getPage(id)
-  } catch (error: any) {
-    console.error(
-      `[notion] getPage failed for ${id} via ${CONFIG.notionConfig.apiBaseUrl}:`,
-      error?.response?.status ?? error?.response?.statusCode ?? "",
-      error?.message
-    )
-    throw new Error(`[notion] getPage failed: ${error?.message}`)
-  }
+  const response = await fetchPage(id)
   id = idToUuid(id)
   const collectionValue = Object.values(response.collection)[0]?.value as any
   const collection = collectionValue?.value ?? collectionValue

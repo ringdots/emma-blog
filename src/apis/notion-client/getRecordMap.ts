@@ -1,8 +1,5 @@
-import { CONFIG } from "site.config"
-import { NotionAPI } from "notion-client"
+import { fetchPage } from "src/libs/utils/notion/fetchPage"
 
 export const getRecordMap = async (pageId: string) => {
-  const api = new NotionAPI({ apiBaseUrl: CONFIG.notionConfig.apiBaseUrl })
-  const recordMap = await api.getPage(pageId)
-  return recordMap
+  return fetchPage(pageId)
 }
