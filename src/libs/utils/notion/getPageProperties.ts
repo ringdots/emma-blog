@@ -59,9 +59,15 @@ async function getPageProperties(
           for (let i = 0; i < rawUsers.length; i++) {
             if (rawUsers[i][0][1]) {
               const userId = rawUsers[i][0]
-              const res: any = await api.getUsers(userId)
-              const resValue =
+              let res: any = null
+              try {
+                res = await api.getUsers(userId)
+              } catch (error) {
+                console.warn(`[notion] failed to fetch user ${userId[1]}`)
+              }
+              const userEntry: any =
                 res?.recordMapWithRoles?.notion_user?.[userId[1]]?.value
+              const resValue = userEntry?.value ?? userEntry
               const user = {
                 id: resValue?.id,
                 name:
