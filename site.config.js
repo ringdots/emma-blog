@@ -13,7 +13,7 @@ const CONFIG = {
   projects: [],
   // blog setting (required)
   blog: {
-    title: "Emma-blog",
+    title: "Emma Blog",
     description: "Product Manager Emma의 블로그",
     scheme: "system", // 'light' | 'dark' | 'system'
   },
