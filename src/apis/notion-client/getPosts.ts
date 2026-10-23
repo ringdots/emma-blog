@@ -15,7 +15,17 @@ export const getPosts = async () => {
   let id = CONFIG.notionConfig.pageId as string
   const api = new NotionAPI({ apiBaseUrl: CONFIG.notionConfig.apiBaseUrl })
 
-  const response = await api.getPage(id)
+  let response
+  try {
+    response = await api.getPage(id)
+  } catch (error: any) {
+    console.error(
+      `[notion] getPage failed for ${id} via ${CONFIG.notionConfig.apiBaseUrl}:`,
+      error?.response?.status ?? error?.response?.statusCode ?? "",
+      error?.message
+    )
+    throw new Error(`[notion] getPage failed: ${error?.message}`)
+  }
   id = idToUuid(id)
   const collectionValue = Object.values(response.collection)[0]?.value as any
   const collection = collectionValue?.value ?? collectionValue
