@@ -48,7 +48,7 @@ export const getPosts = async () => {
       if (!properties.status?.length) properties.status = ["Private"]
       if (!properties.type?.length) properties.type = ["Post"]
       if (!properties.slug?.trim()) {
-        properties.slug = `post-${id.replace(/-/g, "").slice(0, 8)}`
+        properties.slug = `post-${id.replace(/-/g, "").slice(-8)}`
       }
       if (!properties.date?.start_date) {
         // created time in KST (UTC+9)
