@@ -15,7 +15,7 @@ const CONFIG = {
   blog: {
     title: "Emma-blog",
     description: "Product Manager Emma의 블로그",
-    scheme: "dark", // 'light' | 'dark' | 'system'
+    scheme: "system", // 'light' | 'dark' | 'system'
   },
 
   // CONFIG configration (required)
