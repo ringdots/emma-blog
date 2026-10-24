@@ -14,7 +14,7 @@ const CONFIG = {
   // blog setting (required)
   blog: {
     title: "Emma Blog",
-    description: "Product Manager Emma의 블로그",
+    description: "문제를 구조로 풀고, 성과로 증명하는 PM",
     scheme: "system", // 'light' | 'dark' | 'system'
   },
 
